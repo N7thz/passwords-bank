@@ -22,7 +22,7 @@ export default async function SignUpPage() {
 
   const user = await getUser()
 
-  // if (user) redirect("/sign-in", RedirectType.replace)
+  if (user) redirect("/sign-in", RedirectType.replace)
 
   return (
     <div className="flex-1 flex justify-center items-center">

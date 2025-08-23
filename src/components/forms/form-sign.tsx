@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Info } from "lucide-react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
-import { use, useState } from "react"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 
 export const FormSign = () => {
@@ -39,7 +39,7 @@ export const FormSign = () => {
     async function onSignInSubmit(data: FormSignData) {
 
         await signIn(data)
-            .then(() => push("/"))
+            .then(() => push("/home"))
             .catch((err) => toast({
                 title: "Error",
                 description: err.message,

@@ -16,3 +16,14 @@ model User {
 
   @@map("users")
 }
+
+model Password {
+  id        String   @id @default(uuid())
+  password  String
+  site      String
+  account   String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("passwords")
+}
