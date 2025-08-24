@@ -48,7 +48,10 @@ export default function Home() {
 				{passwords.length > 0 ? (
 					<ScrollArea className="h-[500px] bg-card">
 						<ScrollBar />
-						<CardContent className="space-y-4 grid grid-cols-3 gap-2 size-full">
+						<CardContent className={cn(
+							"space-y-4 grid grid-cols-3 gap-2 size-full",
+							"max-md:grid-cols-1"
+						)}>
 							{passwords.map(password => (
 								<CardPassword
 									key={password.id}
@@ -65,7 +68,7 @@ export default function Home() {
 				<CardFooter className="flex-col items-end">
 					<Button
 						asChild
-						className="w-1/3"
+						className={cn("w-1/3", "max-md:w-full")}
 					>
 						<Link href={"/register-password"}>
 							Register a password
