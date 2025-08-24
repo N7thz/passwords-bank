@@ -75,8 +75,8 @@ export const FormSign = () => {
                         {...register("email")}
                         className={cn(
                             (dirtyFields.email && !errors.email) && [
-                                "focus-visible:ring-emerald-700",
-                                "not-focus-visible:border-emerald-700"
+                                "focus-visible:ring-primary",
+                                "not-focus-visible:border-primary"
                             ],
                             errors.email && [
                                 "focus-visible:ring-destructive",
@@ -102,8 +102,8 @@ export const FormSign = () => {
                         {...register("password")}
                         className={cn(
                             (dirtyFields.password && !errors.password) && [
-                                "focus-visible:ring-emerald-700 ",
-                                "not-focus-visible:border-emerald-700"
+                                "focus-visible:ring-primary ",
+                                "not-focus-visible:border-primary"
                             ],
                             errors.password && [
                                 "focus-visible:ring-destructive",

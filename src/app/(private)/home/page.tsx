@@ -1,17 +1,7 @@
 "use client"
 
 import { findPasswords } from "@/actions/find-passwords"
-import { InputPassWord } from "@/components/input-password"
-import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogTitle,
-	AlertDialogTrigger
-} from "@/components/ui/alert-dialog"
+import { CardPassword } from "@/components/card-password"
 import { Button } from "@/components/ui/button"
 import {
 	Card,
@@ -20,56 +10,12 @@ import {
 	CardHeader,
 	CardTitle
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Separator } from "@/components/ui/separator"
-import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
 import { useQuery } from "@tanstack/react-query"
-
-export function AlertDialogDemo() {
-	return (
-		<AlertDialog>
-			<AlertDialogTrigger asChild>
-				<Button className="w-full">
-					Register a password
-				</Button>
-			</AlertDialogTrigger>
-			<AlertDialogContent className="border-primary">
-				<AlertDialogHeader>
-					<AlertDialogTitle>
-						Register a password
-					</AlertDialogTitle>
-				</AlertDialogHeader>
-				<form
-					id="password-form"
-					className="space-y-4"
-					onSubmit={(e) => {
-						e.preventDefault()
-						alert("Form submitted")
-					}}
-				>
-					<InputPassWord placeholder="Enter your password" />
-					<InputPassWord placeholder="Confirm your password" />
-					<Input placeholder="Enter the site" />
-					<Input placeholder="Enter your account" />
-				</form>
-				<Separator />
-				<AlertDialogFooter>
-					<AlertDialogCancel className="w-1/2">
-						Cancel
-					</AlertDialogCancel>
-					<AlertDialogAction
-						type="submit"
-						form="password-form"
-						className="w-1/2"
-					>
-						Continue
-					</AlertDialogAction>
-				</AlertDialogFooter>
-			</AlertDialogContent>
-		</AlertDialog>
-	)
-}
+import Link from "next/link"
+import { CardError } from "./card-error"
+import { CardLoading } from "./card-loading"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 export default function Home() {
 
@@ -83,57 +29,14 @@ export default function Home() {
 		queryFn: async () => findPasswords(),
 	})
 
-	if (status === "error") {
-		return (
-			<div className="flex-1 flex justify-center items-center">
-				<Card className={cn(
-					"w-1/3 border-primary",
-					"max-md:w-2/3",
-					"max-sm:w-11/12"
-				)}>
-					<CardHeader>
-						<CardTitle className="text-lg">
-							An error occurred while fetching passwords.
-						</CardTitle>
-					</CardHeader>
-					<CardFooter>
-						<Button
-							className="w-full"
-							onClick={() => refetch()}
-						>
-							Retry
-						</Button>
-					</CardFooter>
-				</Card>
-			</div>
-		)
-	}
+	if (status === "error") return <CardError refetch={refetch} />
 
-	if (isLoading || !passwords) {
-		return (
-			<div className="flex-1 flex justify-center items-center">
-				<Card className={cn(
-					"w-1/3 border-primary",
-					"max-md:w-2/3",
-					"max-sm:w-11/12"
-				)}>
-					<CardHeader>
-						<CardTitle className="text-2lg">
-							<Skeleton />
-						</CardTitle>
-					</CardHeader>
-					<CardContent className="size-full">
-						<Skeleton className="h-32" />
-					</CardContent>
-				</Card>
-			</div>
-		)
-	}
+	if (isLoading || !passwords) return <CardLoading />
 
 	return (
 		<div className="flex-1 flex justify-center items-center">
 			<Card className={cn(
-				"w-1/3 border-primary",
+				"w-10/12 border-primary",
 				"max-md:w-2/3",
 				"max-sm:w-11/12"
 			)}>
@@ -142,27 +45,49 @@ export default function Home() {
 						Welcome back!
 					</CardTitle>
 				</CardHeader>
-				<CardContent className="space-y-4">
-					{
-						passwords.length > 0 ? (
+				{
+					passwords.length > 0
+						? (
+							<ScrollArea className="h-[500px] bg-card">
+								<ScrollBar />
+								<CardContent className="space-y-4 grid grid-cols-3 gap-2 size-full">
+									{
+										passwords.map(({ id, ...password }) => <CardPassword
+											key={id}
+											password={password}
+										/>)
+									}
+								</CardContent>
+							</ScrollArea>
+						)
+						: (
 							<p className="text-base text-muted-foreground">
+								No passwords found.
+							</p>
+						)
+
+				}
+				<CardFooter className="flex-col items-end">
+					<Button
+						asChild
+						className="w-full"
+					>
+						<Link href={"/register-password"}>
+							Register a password
+						</Link>
+					</Button>
+					{
+						passwords.length > 0 && (
+							<p className="text-base text-muted-foreground pt-4">
 								You have
-								<span className="font-medium text-foreground">
+								<span className="mx-0.5 font-medium text-foreground">
 									{passwords.length}
 								</span>
 								password{passwords.length > 1 ? 's' : ''} saved.
 							</p>
 						)
-							: (
-								<>
-									<p className="text-base text-muted-foreground">
-										No passwords found.
-									</p>
-									<AlertDialogDemo />
-								</>
-							)
 					}
-				</CardContent>
+				</CardFooter>
 			</Card>
 		</div >
 	)

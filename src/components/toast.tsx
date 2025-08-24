@@ -7,8 +7,8 @@ type ToastProps = ExternalToast & {
 }
 
 export const toast = ({
-    title, variant = "success", ...props
-}: ToastProps) => toastPrimitive(
+  title, variant = "success", ...props
+}: ToastProps, p0?: unknown) => toastPrimitive(
     title,
     {
         className: "border-primary",
