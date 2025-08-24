@@ -4,10 +4,10 @@ import {
 	SignInButton,
 	SignUpButton,
 	UserButton,
-} from "@clerk/nextjs"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ModeToggle } from "./mode-toogle"
+} from "@clerk/nextjs";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "./mode-toogle";
 
 export function Header() {
 	return (
@@ -27,5 +27,5 @@ export function Header() {
 				</SignedIn>
 			</div>
 		</header>
-	)
+	);
 }

@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { Monitor, Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
-import { Button } from "@/components/ui/button"
+import { Monitor, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 
 export const ModeToggle = () => {
-	const { setTheme, theme: currentTheme } = useTheme()
+	const { setTheme, theme: currentTheme } = useTheme();
 
 	const icons = [
 		{
@@ -26,7 +26,7 @@ export const ModeToggle = () => {
 			Icon: Monitor,
 			theme: "system",
 		},
-	]
+	];
 
 	return (
 		<div>
@@ -56,5 +56,5 @@ export const ModeToggle = () => {
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</div>
-	)
-}
+	);
+};
