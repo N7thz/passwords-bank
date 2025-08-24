@@ -1,4 +1,4 @@
-import z from "zod";
+import z from "zod"
 
 export const registerPasswordSchema = z
 	.object({
@@ -26,6 +26,6 @@ export const registerPasswordSchema = z
 	.refine((data) => data.password === data.confirmPassword, {
 		message: "Passwords don't match",
 		path: ["confirmPassword"],
-	});
+	})
 
-export type RegisterPasswordSchema = z.infer<typeof registerPasswordSchema>;
+export type RegisterPasswordProps = z.infer<typeof registerPasswordSchema>

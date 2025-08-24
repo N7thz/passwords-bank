@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button"
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
 export const CardError = ({ refetch }: { refetch: () => void }) => {
 	return (
@@ -20,5 +20,5 @@ export const CardError = ({ refetch }: { refetch: () => void }) => {
 				</CardFooter>
 			</Card>
 		</div>
-	);
-};
+	)
+}

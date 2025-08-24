@@ -1,39 +1,39 @@
-"use client";
+"use client"
 
-import { signIn } from "@/actions/sign-in";
-import { signUp } from "@/actions/sign-up";
-import { toast } from "@/components/toast";
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
-import { signSchema, type FormSignData } from "@/schemas/login-schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Info } from "lucide-react";
-import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { signIn } from "@/actions/sign-in"
+import { signUp } from "@/actions/sign-up"
+import { toast } from "@/components/toast"
+import { Button } from "@/components/ui/button"
+import { Form } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
+import { cn } from "@/lib/utils"
+import { signSchema, type FormSignData } from "@/schemas/login-schema"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Info } from "lucide-react"
+import Link from "next/link"
+import { useRouter, usePathname } from "next/navigation"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
 
 export const FormSign = () => {
-	const [visible, setVisible] = useState(false);
+	const [visible, setVisible] = useState(false)
 
-	const pathname = usePathname() as "/sign-in" | "/sign-up";
+	const pathname = usePathname() as "/sign-in" | "/sign-up"
 
 	const form = useForm<FormSignData>({
 		mode: "onSubmit",
 		reValidateMode: "onChange",
 		resolver: zodResolver(signSchema),
-	});
+	})
 
 	const {
 		handleSubmit,
 		register,
 		formState: { errors, dirtyFields },
-	} = form;
+	} = form
 
-	const { push } = useRouter();
+	const { push } = useRouter()
 
 	async function onSignInSubmit(data: FormSignData) {
 		await signIn(data)
@@ -44,7 +44,7 @@ export const FormSign = () => {
 					description: err.message,
 					variant: "error",
 				}),
-			);
+			)
 	}
 
 	async function onSignUpSubmit(data: FormSignData) {
@@ -61,10 +61,10 @@ export const FormSign = () => {
 					description: err.message,
 					variant: "error",
 				}),
-			);
+			)
 	}
 
-	const onSubmit = pathname === "/sign-in" ? onSignInSubmit : onSignUpSubmit;
+	const onSubmit = pathname === "/sign-in" ? onSignInSubmit : onSignUpSubmit
 
 	return (
 		<Form {...form}>
@@ -75,10 +75,10 @@ export const FormSign = () => {
 						{...register("email")}
 						className={cn(
 							dirtyFields.email &&
-								!errors.email && [
-									"focus-visible:ring-primary",
-									"not-focus-visible:border-primary",
-								],
+							!errors.email && [
+								"focus-visible:ring-primary",
+								"not-focus-visible:border-primary",
+							],
 							errors.email && [
 								"focus-visible:ring-destructive",
 								"not-focus-visible:border-destructive",
@@ -99,10 +99,10 @@ export const FormSign = () => {
 						{...register("password")}
 						className={cn(
 							dirtyFields.password &&
-								!errors.password && [
-									"focus-visible:ring-primary ",
-									"not-focus-visible:border-primary",
-								],
+							!errors.password && [
+								"focus-visible:ring-primary ",
+								"not-focus-visible:border-primary",
+							],
 							errors.password && [
 								"focus-visible:ring-destructive",
 								"not-focus-visible:border-destructive",
@@ -142,5 +142,5 @@ export const FormSign = () => {
 				</Button>
 			</form>
 		</Form>
-	);
-};
+	)
+}

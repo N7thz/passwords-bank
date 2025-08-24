@@ -1,9 +1,9 @@
-"use server";
+"use server"
 
-import { prisma } from "@/lib/prisma";
-import { RegisterPasswordSchema } from "@/schemas/register-password-schema";
+import { prisma } from "@/lib/prisma"
+import { RegisterPasswordProps } from "@/schemas/register-password-schema"
 
-type RegisterPasswordProps = Omit<RegisterPasswordSchema, "confirmPassword">;
+type RegisterPasswordProps = Omit<RegisterPasswordProps, "confirmPassword">
 
 export async function registerPassword({
 	account,
@@ -16,5 +16,5 @@ export async function registerPassword({
 			password,
 			site,
 		},
-	});
+	})
 }

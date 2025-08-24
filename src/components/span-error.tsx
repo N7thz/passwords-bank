@@ -1,11 +1,11 @@
-import { cn } from "@/lib/utils";
-import { Info } from "lucide-react";
-import { ComponentProps } from "react";
+import { cn } from "@/lib/utils"
+import { Info } from "lucide-react"
+import { ComponentProps } from "react"
 
 type SpanErrorMessageProps = ComponentProps<"div"> & {
-	message: string | undefined;
-	size?: number;
-};
+	message: string | undefined
+	size?: number
+}
 
 export const SpanErrorMessage = ({
 	message,
@@ -24,5 +24,5 @@ export const SpanErrorMessage = ({
 			<Info className={cn(size ? `size-${size}` : "size-4")} />
 			<span>{message}</span>
 		</div>
-	);
-};
+	)
+}

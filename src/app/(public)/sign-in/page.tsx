@@ -1,6 +1,6 @@
-import { FormSign } from "@/components/forms/form-sign";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { FormSign } from "@/components/forms/form-sign"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
 export default async function SignInPage() {
 	return (
@@ -16,5 +16,5 @@ export default async function SignInPage() {
 				</CardContent>
 			</Card>
 		</div>
-	);
+	)
 }

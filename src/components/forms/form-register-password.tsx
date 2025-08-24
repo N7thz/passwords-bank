@@ -1,29 +1,31 @@
-"use client";
+"use client"
 
-import { generateAdvancedPassword } from "@/actions/generate-strong-password";
-import { registerPassword } from "@/actions/register-password";
-import { InputPassWord } from "@/components/input-password";
-import { SpanErrorMessage } from "@/components/span-error";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import { generateAdvancedPassword } from "@/functions/generate-strong-password"
+import { registerPassword } from "@/actions/register-password"
+import { InputPassWord } from "@/components/input-password"
+import { SpanErrorMessage } from "@/components/span-error"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 import {
 	registerPasswordSchema,
-	RegisterPasswordSchema,
-} from "@/schemas/register-password-schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Form } from "@/components/ui/form";
-import { toast } from "@/components/toast";
-import { useRouter } from "next/navigation";
-import { queryClient } from "@/components/theme-provider";
+	RegisterPasswordProps
+} from "@/schemas/register-password-schema"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { Form } from "@/components/ui/form"
+import { toast } from "@/components/toast"
+import { useRouter } from "next/navigation"
+import { queryClient } from "@/components/theme-provider"
+import { generatePassword } from "@/functions/generate-password"
 
 export const FormRegisterPassword = () => {
-	const form = useForm<RegisterPasswordSchema>({
+
+	const form = useForm<RegisterPasswordProps>({
 		mode: "onSubmit",
 		reValidateMode: "onChange",
 		resolver: zodResolver(registerPasswordSchema),
-	});
+	})
 
 	const {
 		setValue,
@@ -31,11 +33,11 @@ export const FormRegisterPassword = () => {
 		register,
 		handleSubmit,
 		formState: { errors, dirtyFields },
-	} = form;
+	} = form
 
-	const { push } = useRouter();
+	const { push } = useRouter()
 
-	async function onSubmit({ account, password, site }: RegisterPasswordSchema) {
+	async function onSubmit({ account, password, site }: RegisterPasswordProps) {
 		await registerPassword({
 			account,
 			password,
@@ -44,12 +46,12 @@ export const FormRegisterPassword = () => {
 			.then(() => {
 				queryClient.invalidateQueries({
 					queryKey: ["find-passwords"],
-				});
+				})
 				toast({
 					title: "Success",
 					description: "Password registered successfully!",
 					onAutoClose: () => push("/home"),
-				});
+				})
 			})
 			.catch(() =>
 				toast({
@@ -57,13 +59,7 @@ export const FormRegisterPassword = () => {
 					description: "Failed to register password.",
 					variant: "error",
 				}),
-			);
-	}
-
-	function generatePassword() {
-		const password = generateAdvancedPassword();
-		setValue("password", password);
-		setValue("confirmPassword", password);
+			)
 	}
 
 	return (
@@ -80,10 +76,10 @@ export const FormRegisterPassword = () => {
 						{...register("password")}
 						className={cn(
 							dirtyFields.password &&
-								!errors.password && [
-									"focus-visible:ring-primary",
-									"not-focus-visible:border-primary",
-								],
+							!errors.password && [
+								"focus-visible:ring-primary",
+								"not-focus-visible:border-primary",
+							],
 							errors.password && [
 								"focus-visible:ring-destructive",
 								"not-focus-visible:border-destructive",
@@ -94,7 +90,7 @@ export const FormRegisterPassword = () => {
 						type="button"
 						variant={"link"}
 						className="p-0"
-						onClick={generatePassword}
+						onClick={() => generatePassword(setValue)}
 					>
 						Gerar senha Forte
 					</Button>
@@ -110,10 +106,10 @@ export const FormRegisterPassword = () => {
 						{...register("confirmPassword")}
 						className={cn(
 							dirtyFields.confirmPassword &&
-								!errors.confirmPassword && [
-									"focus-visible:ring-primary",
-									"not-focus-visible:border-primary",
-								],
+							!errors.confirmPassword && [
+								"focus-visible:ring-primary",
+								"not-focus-visible:border-primary",
+							],
 							errors.confirmPassword && [
 								"focus-visible:ring-destructive",
 								"not-focus-visible:border-destructive",
@@ -130,10 +126,10 @@ export const FormRegisterPassword = () => {
 						{...register("site")}
 						className={cn(
 							dirtyFields.site &&
-								!errors.site && [
-									"focus-visible:ring-primary",
-									"not-focus-visible:border-primary",
-								],
+							!errors.site && [
+								"focus-visible:ring-primary",
+								"not-focus-visible:border-primary",
+							],
 							errors.site && [
 								"focus-visible:ring-destructive",
 								"not-focus-visible:border-destructive",
@@ -148,10 +144,10 @@ export const FormRegisterPassword = () => {
 						{...register("account")}
 						className={cn(
 							dirtyFields.account &&
-								!errors.account && [
-									"focus-visible:ring-primary",
-									"not-focus-visible:border-primary",
-								],
+							!errors.account && [
+								"focus-visible:ring-primary",
+								"not-focus-visible:border-primary",
+							],
 							errors.account && [
 								"focus-visible:ring-destructive",
 								"not-focus-visible:border-destructive",
@@ -164,5 +160,5 @@ export const FormRegisterPassword = () => {
 				</div>
 			</form>
 		</Form>
-	);
-};
+	)
+}

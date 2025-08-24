@@ -1,21 +1,21 @@
-import { FormSign } from "@/components/forms/form-sign";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { prisma } from "@/lib/prisma";
-import { cn } from "@/lib/utils";
-import { redirect, RedirectType } from "next/navigation";
+import { FormSign } from "@/components/forms/form-sign"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { prisma } from "@/lib/prisma"
+import { cn } from "@/lib/utils"
+import { redirect, RedirectType } from "next/navigation"
 
 export default async function SignUpPage() {
 	async function getUser() {
-		const user = await prisma.user.findFirst();
+		const user = await prisma.user.findFirst()
 
-		if (user === null) return undefined;
+		if (user === null) return undefined
 
-		return user;
+		return user
 	}
 
-	const user = await getUser();
+	const user = await getUser()
 
-	if (user) redirect("/sign-in", RedirectType.replace);
+	if (user) redirect("/sign-in", RedirectType.replace)
 
 	return (
 		<div className="flex-1 flex justify-center items-center">
@@ -30,5 +30,5 @@ export default async function SignUpPage() {
 				</CardContent>
 			</Card>
 		</div>
-	);
+	)
 }

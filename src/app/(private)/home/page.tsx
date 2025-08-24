@@ -1,23 +1,24 @@
-"use client";
+"use client"
 
-import { findPasswords } from "@/actions/find-passwords";
-import { CardPassword } from "@/components/card-password";
-import { Button } from "@/components/ui/button";
+import { findPasswords } from "@/actions/find-passwords"
+import { CardPassword } from "@/components/card-password"
+import { Button } from "@/components/ui/button"
 import {
 	Card,
 	CardContent,
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
-import { CardError } from "./card-error";
-import { CardLoading } from "./card-loading";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+} from "@/components/ui/card"
+import { cn } from "@/lib/utils"
+import { useQuery } from "@tanstack/react-query"
+import Link from "next/link"
+import { CardError } from "./card-error"
+import { CardLoading } from "./card-loading"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 export default function Home() {
+	
 	const {
 		data: passwords,
 		isLoading,
@@ -26,11 +27,11 @@ export default function Home() {
 	} = useQuery({
 		queryKey: ["find-passwords"],
 		queryFn: async () => findPasswords(),
-	});
+	})
 
-	if (status === "error") return <CardError refetch={refetch} />;
+	if (status === "error") return <CardError refetch={refetch} />
 
-	if (isLoading || !passwords) return <CardLoading />;
+	if (isLoading || !passwords) return <CardLoading />
 
 	return (
 		<div className="flex-1 flex justify-center items-center">
@@ -48,8 +49,11 @@ export default function Home() {
 					<ScrollArea className="h-[500px] bg-card">
 						<ScrollBar />
 						<CardContent className="space-y-4 grid grid-cols-3 gap-2 size-full">
-							{passwords.map(({ id, ...password }) => (
-								<CardPassword key={id} password={password} />
+							{passwords.map(password => (
+								<CardPassword
+									key={password.id}
+									password={password}
+								/>
 							))}
 						</CardContent>
 					</ScrollArea>
@@ -72,5 +76,5 @@ export default function Home() {
 				</CardFooter>
 			</Card>
 		</div>
-	);
+	)
 }

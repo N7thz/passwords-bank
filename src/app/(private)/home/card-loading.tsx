@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button"
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Skeleton } from "@/components/ui/skeleton"
+import { cn } from "@/lib/utils"
 
 export const CardLoading = () => {
 	return (
@@ -21,5 +21,5 @@ export const CardLoading = () => {
 				</CardFooter>
 			</Card>
 		</div>
-	);
-};
+	)
+}

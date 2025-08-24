@@ -1,22 +1,22 @@
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
-import { CheckIcon, EyeIcon, EyeOffIcon, XIcon } from "lucide-react";
-import { ComponentProps, useId, useMemo, useState } from "react";
+import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
+import { CheckIcon, EyeIcon, EyeOffIcon, XIcon } from "lucide-react"
+import { ComponentProps, useId, useMemo, useState } from "react"
 
 type InputPassWordProps = ComponentProps<typeof Input> & {
-	password: string;
-	type?: "password" | "confirmPassword";
-};
+	password: string
+	type?: "password" | "confirmPassword"
+}
 
 export const InputPassWord = ({
 	password,
 	type = "password",
 	...props
 }: InputPassWordProps) => {
-	const id = useId();
-	const [isVisible, setIsVisible] = useState<boolean>(false);
+	const id = useId()
+	const [isVisible, setIsVisible] = useState<boolean>(false)
 
-	const toggleVisibility = () => setIsVisible((prevState) => !prevState);
+	const toggleVisibility = () => setIsVisible((prevState) => !prevState)
 
 	const checkStrength = (pass: string) => {
 		const requirements = [
@@ -36,29 +36,29 @@ export const InputPassWord = ({
 				regex: /[A-Z]/,
 				text: "Password must contain at least one uppercase letter",
 			},
-		];
+		]
 
 		return requirements.map((req) => ({
 			met: req.regex.test(pass),
 			text: req.text,
-		}));
-	};
+		}))
+	}
 
-	const strength = checkStrength(password);
+	const strength = checkStrength(password)
 
 	const strengthScore = useMemo(() => {
-		return strength.filter((req) => req.met).length;
-	}, [strength]);
+		return strength.filter((req) => req.met).length
+	}, [strength])
 
 	const getStrengthColor = (score: number) => {
-		if (score === 0) return "bg-border";
-		if (score <= 1) return "bg-destructive";
-		if (score <= 2) return "bg-orange-500";
-		if (score === 3) return "bg-amber-500";
-		return "bg-primary";
-	};
+		if (score === 0) return "bg-border"
+		if (score <= 1) return "bg-destructive"
+		if (score <= 2) return "bg-orange-500"
+		if (score === 3) return "bg-amber-500"
+		return "bg-primary"
+	}
 
-	const Icon = isVisible ? EyeOffIcon : EyeIcon;
+	const Icon = isVisible ? EyeOffIcon : EyeIcon
 
 	if (type === "confirmPassword") {
 		return (
@@ -78,7 +78,7 @@ export const InputPassWord = ({
 					<Icon className="size-4" />
 				</button>
 			</div>
-		);
+		)
 	}
 
 	return (
@@ -133,5 +133,5 @@ export const InputPassWord = ({
 				))}
 			</ul>
 		</div>
-	);
-};
+	)
+}
