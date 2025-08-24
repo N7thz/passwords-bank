@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
-import { CardPasswordAction } from "./card-password-action"
+import { DropPasswordAction } from "./drop-password-action"
 
 export const CardPassword = ({
   password: { id, createdAt, site, account, password },
@@ -45,7 +45,7 @@ export const CardPassword = ({
           Created at {formatDate(createdAt, "dd 'de' MMMM 'de' yyyy")}
         </CardDescription>
         <CardAction>
-          <CardPasswordAction id={id} />
+          <DropPasswordAction id={id} />
         </CardAction>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -67,7 +67,11 @@ export const CardPassword = ({
             >
               <Icon />
             </Button>
-            <Button size={"icon"} onClick={onCopy}>
+            <Button 
+            size={"icon"} 
+            onClick={onCopy}
+            className="cursor-copy"
+            >
               <Copy />
             </Button>
           </div>

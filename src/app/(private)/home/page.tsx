@@ -18,7 +18,7 @@ import { CardLoading } from "./card-loading"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
 export default function Home() {
-	
+
 	const {
 		data: passwords,
 		isLoading,
@@ -58,16 +58,23 @@ export default function Home() {
 						</CardContent>
 					</ScrollArea>
 				) : (
-					<p className="text-base text-muted-foreground">No passwords found.</p>
+					<p className="text-base text-muted-foreground">
+						No passwords found.
+					</p>
 				)}
 				<CardFooter className="flex-col items-end">
-					<Button asChild className="w-full">
-						<Link href={"/register-password"}>Register a password</Link>
+					<Button
+						asChild
+						className="w-1/3"
+					>
+						<Link href={"/register-password"}>
+							Register a password
+						</Link>
 					</Button>
 					{passwords.length > 0 && (
 						<p className="text-base text-muted-foreground pt-4">
 							You have
-							<span className="mx-0.5 font-medium text-foreground">
+							<span className="mx-1.5 font-medium text-foreground">
 								{passwords.length}
 							</span>
 							password{passwords.length > 1 ? "s" : ""} saved.
